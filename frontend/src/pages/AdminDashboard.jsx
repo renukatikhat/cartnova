@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react'
+import API_BASE_URL from '../api'
 
 function AdminDashboard() {
   const [orders, setOrders] = useState([])
@@ -29,7 +30,7 @@ function AdminDashboard() {
 
   const fetchOrders = async () => {
     const response = await fetch(
-      'http://localhost:5000/api/orders/admin/all',
+      `${API_BASE_URL}/api/orders/admin/all`,
       { headers: { Authorization: `Bearer ${token}` } }
     )
     const data = await response.json()
@@ -38,7 +39,7 @@ function AdminDashboard() {
   }
 
   const fetchProducts = async () => {
-    const response = await fetch('http://localhost:5000/api/products')
+    const response = await fetch(`${API_BASE_URL}/api/products`)
     const data = await response.json()
     if (!response.ok) throw new Error(data.message || 'Failed to fetch products')
     setProducts(Array.isArray(data) ? data : [])
@@ -72,8 +73,8 @@ function AdminDashboard() {
 
     try {
       const url = editingId
-        ? `http://localhost:5000/api/products/${editingId}`
-        : 'http://localhost:5000/api/products'
+        ? `${API_BASE_URL}/api/products/${editingId}`
+        : `${API_BASE_URL}/api/products`
 
       const response = await fetch(url, {
         method: editingId ? 'PUT' : 'POST',
@@ -117,7 +118,7 @@ function AdminDashboard() {
     setSuccess('')
     try {
       const response = await fetch(
-        `http://localhost:5000/api/products/${id}`,
+        `${API_BASE_URL}/api/products/${id}`,
         { method: 'DELETE', headers }
       )
       const data = await response.json()
@@ -143,7 +144,7 @@ function AdminDashboard() {
     setSuccess('')
     try {
       const response = await fetch(
-        `http://localhost:5000/api/orders/${orderId}/status`,
+        `${API_BASE_URL}/api/orders/${orderId}/status`,
         {
           method: 'PATCH',
           headers,

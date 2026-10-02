@@ -1,5 +1,6 @@
 
 import { useState } from 'react'
+import API_BASE_URL from './api'
 import './Auth.css'
 
 function Auth({ onLogin, onBack }) {
@@ -19,7 +20,7 @@ function Auth({ onLogin, onBack }) {
       const endpoint = isRegister ? 'register' : 'login'
 
       const response = await fetch(
-        `http://localhost:5000/api/auth/${endpoint}`,
+        `${API_BASE_URL}/api/auth/${endpoint}`,
         {
           method: 'POST',
           headers: {

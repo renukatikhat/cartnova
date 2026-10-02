@@ -1,4 +1,5 @@
 
+import API_BASE_URL from "./api";
 import { useEffect, useState } from 'react'
 import './App.css'
 import Auth from './Auth'
@@ -47,7 +48,7 @@ function App() {
 
   // Fetch products from backend
   useEffect(() => {
-    fetch('http://localhost:5000/api/products')
+    fetch(`${API_BASE_URL}/api/products`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch products')
@@ -101,7 +102,7 @@ function App() {
 
     try {
       const response = await fetch(
-        'http://localhost:5000/api/orders/my-orders',
+        `${API_BASE_URL}/api/orders/my-orders`,
         {
           method: 'GET',
           headers: {
@@ -172,7 +173,7 @@ function App() {
     try {
       setIsPlacingOrder(true)
 
-      const response = await fetch('http://localhost:5000/api/orders', {
+      const response = await fetch(`${API_BASE_URL}/api/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
